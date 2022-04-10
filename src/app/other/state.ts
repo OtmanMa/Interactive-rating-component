@@ -23,6 +23,18 @@ export class State {
   }
 
   resetState() {
+    const childsForRatings = [];
+
+    for (let i = 0; i < 5; i++) {
+      const newItem = {
+        name: (i + 1).toString(),
+        classes: 'rating'
+      };
+
+      childsForRatings.push(newItem)
+    }
+
+    this.state.items = childsForRatings;
     this.state.step = true;
     this.state.currentSelect = null;
 
