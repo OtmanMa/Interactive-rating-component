@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { State } from "./other/state";
+import { MDCRipple } from '@material/ripple';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'integration-app';
+  stepOneYet?: boolean;
+
+  constructor(
+    private state: State
+  ) {}
+
+  ngOnInit(): void {
+    this.state.getState()
+      .subscribe(state => {
+        this.stepOneYet = state.step;
+      });
+  }
+
+  ngDoCheck(): void {
+    this.state.getState()
+      .subscribe(state => {
+        this.stepOneYet = state.step;
+      });
+  }
+
+  onReset() {
+    this.state.resetState();
+  }
 }
