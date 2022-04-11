@@ -14,13 +14,6 @@ export class AppComponent {
     private state: State
   ) {}
 
-  ngOnInit(): void {
-    this.state.getState()
-      .subscribe(state => {
-        this.stepOneYet = state.step;
-      });
-  }
-
   ngDoCheck(): void {
     this.state.getState()
       .subscribe(state => {
