@@ -20,4 +20,9 @@ export class AppComponent implements OnInit {
   onReset() {
     this.state.resetState();
   }
+
+  ngOnDestroy(): void {
+    console.log("hello world");
+    this.state.obsState.unsubscribe();
+  }
 }

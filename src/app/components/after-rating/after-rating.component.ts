@@ -20,6 +20,6 @@ export class AfterRatingComponent implements OnInit {
       .subscribe(state => {
         this.currentRating = (typeof state.currentSelect === 'number') ? state.currentSelect : undefined;
       });
+    console.log('after');
   }
-
 }
