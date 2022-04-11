@@ -16,8 +16,6 @@ export class BeforeRatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.state.obsState.subscribe( data => this.allChilds = data.items );
-
-    console.log('before');
   }
 
   onClick(value: anItem): void {
