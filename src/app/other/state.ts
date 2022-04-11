@@ -1,15 +1,18 @@
 import { Injectable } from "@angular/core";
 import { anItem, aState } from "./type";
-import { from, Observable, of, Subject } from "rxjs";
+import { AsyncSubject, BehaviorSubject, filter, from, Observable, of, ReplaySubject, Subject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class State {
   state: aState;
+  obsState: BehaviorSubject<aState>;
 
   constructor() {
     this.state = this.initAState();
+
+    this.obsState = new BehaviorSubject<aState>(this.state);
   }
 
   initAState(): aState {
@@ -37,6 +40,8 @@ export class State {
     this.state.items = childsForRatings;
     this.state.step = true;
     this.state.currentSelect = null;
+
+    this.obsState.next(this.state);
 
     this.saveCurrentState();
   }
@@ -85,13 +90,18 @@ export class State {
         }
       });
 
+    this.obsState.next(this.state);
+
     this.saveCurrentState();
   }
 
   updateSteps(): void {
     if (this.state.currentSelect !== null) {
       this.state.step = !this.state.step;
+
+      this.obsState.next(this.state);
     }
+
     this.saveCurrentState();
   }
 }

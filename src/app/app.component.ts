@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { State } from "./other/state";
 
 @Component({
@@ -6,18 +6,15 @@ import { State } from "./other/state";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   stepOneYet?: boolean;
 
   constructor(
     private state: State
   ) {}
 
-  ngDoCheck(): void {
-    this.state.getState()
-      .subscribe(state => {
-        this.stepOneYet = state.step;
-      });
+  ngOnInit(): void {
+    this.state.obsState.subscribe( data => this.stepOneYet = data.step );
   }
 
   onReset() {

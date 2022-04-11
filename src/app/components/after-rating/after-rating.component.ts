@@ -15,7 +15,7 @@ export class AfterRatingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.state.getState()
+    this.state.obsState
       .pipe(filter(state => state.currentSelect !== null))
       .subscribe(state => {
         this.currentRating = (typeof state.currentSelect === 'number') ? state.currentSelect : undefined;
