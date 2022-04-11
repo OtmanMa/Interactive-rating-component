@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { State } from "./other/state";
-import { MDCRipple } from '@material/ripple';
 
 @Component({
   selector: 'app-root',
